@@ -9,8 +9,7 @@ LABEL "maintainer"="Andrew Mason <andrewmcodes@protonmail.com>"
 ARG RAILS_ENV="test"
 ENV DEBIAN_FRONTEND noninteractive
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/app/bin"
-ENV APP_USER='app' \
-  APP_HOME='/app' \
+ENV APP_HOME='/app' \
   RAILS_ENV=$RAILS_ENV \
   MALLOC_ARENA_MAX=2
 
@@ -52,7 +51,7 @@ WORKDIR $APP_HOME
 # Application / Install gems
 ########################################
 COPY . $APP_HOME
-RUN chown -R $APP_USER:$APP_USER $APP_HOME && \
+RUN chown -R $APP_HOME && \
   chmod -R 777 /app/bin
 
 ENV BUNDLE_PATH="vendor/cache"
