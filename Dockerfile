@@ -61,3 +61,8 @@ RUN set -ex && bundle check || bundle install --jobs $(nproc) --retry=3 --quiet
 # Install and compile the applications assets
 RUN yarn check || yarn install --frozen-lockfile; \
   yarn cache clean
+
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
