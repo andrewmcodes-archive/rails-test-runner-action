@@ -2,16 +2,7 @@ FROM node:13-slim as node
 FROM ruby:2.6.5-slim
 
 LABEL "maintainer"="Andrew Mason <andrewmcodes@protonmail.com>"
-RUN printenv
-########################################
-# Set Environment variables
-########################################
-ARG RAILS_ENV="test"
 ENV DEBIAN_FRONTEND noninteractive
-ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/app/bin"
-ENV APP_HOME=$GITHUB_WORKSPACE \
-  RAILS_ENV=$RAILS_ENV \
-  MALLOC_ARENA_MAX=2
 
 ########################################
 # Basic application requirements
@@ -38,26 +29,6 @@ COPY --from=node /opt/yarn-* /opt/yarn
 RUN ln -s /opt/yarn/yarn-*/bin/yarn /usr/local/bin/yarn && \
   ln -s /opt/yarn/yarn-*/bin/yarnpkg /usr/local/bin/yarnpkg && \
   mkdir -p /tmp/src /opt
-
-########################################
-# APP Directory and Bundler
-########################################
-RUN mkdir -p $APP_HOME && \
-  gem update --system && \
-  gem install bundler --no-document && gem install rake --no-document
-WORKDIR $APP_HOME
-
-########################################
-# Application / Install gems
-########################################
-COPY . $APP_HOME
-
-ENV BUNDLE_PATH="vendor/cache"
-
-RUN set -ex && bundle check || bundle install --jobs $(nproc) --retry=3 --quiet
-# Install and compile the applications assets
-RUN yarn check || yarn install --frozen-lockfile; \
-  yarn cache clean
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
