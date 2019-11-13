@@ -2,14 +2,14 @@ FROM node:13-slim as node
 FROM ruby:2.6.5-slim
 
 LABEL "maintainer"="Andrew Mason <andrewmcodes@protonmail.com>"
-
+RUN printenv
 ########################################
 # Set Environment variables
 ########################################
 ARG RAILS_ENV="test"
 ENV DEBIAN_FRONTEND noninteractive
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/app/bin"
-ENV APP_HOME='/app' \
+ENV APP_HOME=$GITHUB_WORKSPACE \
   RAILS_ENV=$RAILS_ENV \
   MALLOC_ARENA_MAX=2
 
