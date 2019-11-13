@@ -51,8 +51,6 @@ WORKDIR $APP_HOME
 # Application / Install gems
 ########################################
 COPY . $APP_HOME
-RUN chown -R $APP_HOME && \
-  chmod -R 777 /app/bin
 
 ENV BUNDLE_PATH="vendor/cache"
 
