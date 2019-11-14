@@ -19,10 +19,18 @@ RUN apt-get update -qq && apt-get install -y \
   curl \
   yarn
 
+# Install Chrome for Selenium
+RUN curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /chrome.deb
+RUN dpkg -i /chrome.deb || apt-get install -yf
+RUN rm /chrome.deb
+
+# Install chromedriver for Selenium
+RUN curl https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip -o /usr/local/bin/chromedriver
+RUN chmod +x /usr/local/bin/chromedriver
+
 COPY "entrypoint.sh" "/entrypoint.sh"
 RUN chmod +x /entrypoint.sh
 
-RUN yarn global add chromedriver --prefix /usr/bin
 RUN gem update --system
 RUN gem install bundler -v "2.0.2"
 RUN gem install rake -v "13.0.1"
