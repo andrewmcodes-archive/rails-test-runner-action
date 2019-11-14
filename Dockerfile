@@ -1,4 +1,4 @@
-FROM ruby:2.6.5
+FROM ruby:2.6.5-slim
 
 ENV BUNDLE_PATH="/github/workspace/vendor/bundle"
 
