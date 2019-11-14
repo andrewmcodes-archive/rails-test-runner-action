@@ -5,6 +5,6 @@ printenv
 cd $GITHUB_WORKSPACE
 gem update --system
 gem install bundler --no-document
-bundle install --jobs 4 --retry 3 --quiet
+bundle install --jobs 4 --retry 3
 yarn install --frozen-lockfile
 bundle exec rails db:prepare && bundle exec rails test
