@@ -11,7 +11,8 @@ RUN apk add --update --no-cache \
   graphviz \
   imagemagick \
   tzdata \
-  file
+  file \
+  git
 
 COPY entrypoint.sh /entrypoint.sh
 
