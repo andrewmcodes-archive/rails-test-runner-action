@@ -1,4 +1,4 @@
-FROM ruby:2.6.5
+FROM ruby:2.6.5-slim
 
 ENV BUNDLE_PATH="/github/workspace/vendor/bundle"
 
@@ -9,6 +9,7 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 RUN apt-get update -qq && apt-get install -y \
   build-essential \
   cmake \
+  curl \
   graphviz \
   imagemagick \
   libpq-dev \
