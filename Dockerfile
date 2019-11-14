@@ -1,4 +1,4 @@
-FROM ruby:2.6.5-slim
+FROM ruby:2.6.5
 
 ENV BUNDLE_PATH="/github/workspace/vendor/bundle"
 
@@ -17,7 +17,6 @@ RUN apt-get update -qq && apt-get install -y \
   nodejs \
   postgresql-client \
   postgresql-contrib \
-  gnupg \
   curl \
   yarn
 
