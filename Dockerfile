@@ -16,8 +16,7 @@ RUN apt-get update -qq && apt-get install -y \
   nodejs \
   postgresql-client \
   postgresql-contrib \
-  yarn \
-  lsof
+  yarn
 
 RUN node -v
 RUN yarn -v
