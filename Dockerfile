@@ -8,7 +8,6 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 
 RUN apt-get update -qq && apt-get install -y \
   build-essential \
-  chromium-chromedriver \
   cmake \
   graphviz \
   imagemagick \
@@ -23,6 +22,7 @@ RUN apt-get update -qq && apt-get install -y \
 COPY "entrypoint.sh" "/entrypoint.sh"
 RUN chmod +x /entrypoint.sh
 
+RUN yarn global add chromedriver --prefix /usr/bin
 RUN gem update --system
 RUN gem install bundler -v "2.0.2"
 RUN gem install rake -v "13.0.1"
