@@ -27,6 +27,7 @@ RUN chmod +x /entrypoint.sh
 
 RUN gem update --system
 RUN gem install bundler -v "2.0.2"
+RUN gem install rake -v "13.0.1"
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["help"]
