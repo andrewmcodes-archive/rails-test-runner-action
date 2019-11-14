@@ -10,7 +10,6 @@ RUN apt-get update -qq && apt-get install -y \
   build-essential \
   chromium-chromedriver \
   cmake \
-  curl \
   graphviz \
   imagemagick \
   libpq-dev \
@@ -18,6 +17,8 @@ RUN apt-get update -qq && apt-get install -y \
   nodejs \
   postgresql-client \
   postgresql-contrib \
+  gnupg \
+  curl \
   yarn
 
 COPY "entrypoint.sh" "/entrypoint.sh"
