@@ -1,4 +1,4 @@
-FROM ruby:2.6.5
+FROM ruby:2.6.5-slim
 
 ENV BUNDLE_PATH="/github/workspace/vendor/bundle"
 
@@ -8,7 +8,9 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 
 RUN apt-get update -qq && apt-get install -y \
   build-essential \
+  chromium-chromedriver \
   cmake \
+  curl \
   graphviz \
   imagemagick \
   libpq-dev \
@@ -17,10 +19,6 @@ RUN apt-get update -qq && apt-get install -y \
   postgresql-client \
   postgresql-contrib \
   yarn
-
-RUN node -v
-RUN yarn -v
-RUN ruby -v
 
 COPY "entrypoint.sh" "/entrypoint.sh"
 RUN chmod +x /entrypoint.sh
