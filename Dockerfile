@@ -27,6 +27,8 @@ RUN rm /chrome.deb
 # Install chromedriver for Selenium
 RUN curl https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip -o /usr/local/bin/chromedriver
 RUN chmod +x /usr/local/bin/chromedriver
+RUN unzip /usr/local/bin/chromedriver
+RUN chmod +x /usr/local/bin/chromedriver
 
 COPY "entrypoint.sh" "/entrypoint.sh"
 RUN chmod +x /entrypoint.sh
