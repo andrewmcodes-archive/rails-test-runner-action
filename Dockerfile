@@ -16,19 +16,19 @@ RUN apt-get update -qq && apt-get install -y \
   nodejs \
   postgresql-client \
   postgresql-contrib \
-  curl \
   yarn
 
-# Install Chrome for Selenium
-RUN curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /chrome.deb
-RUN dpkg -i /chrome.deb || apt-get install -yf
-RUN rm /chrome.deb
+# install google chrome
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+RUN apt-get -y update
+RUN apt-get install -y google-chrome-stable
 
-# Install chromedriver for Selenium
-RUN curl https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip -o /usr/local/bin/chromedriver
-RUN chmod +x /usr/local/bin/chromedriver
-RUN unzip /usr/local/bin/chromedriver
-RUN chmod +x /usr/local/bin/chromedriver
+# install chromedriver
+RUN curl https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip -o /tmp/chromedriver
+RUN unzip -o /tmp/chromedriver
+RUN chmod +x /tmp/chromedriver
+COPY /tmp/chromedriver /usr/local/bin/
 
 COPY "entrypoint.sh" "/entrypoint.sh"
 RUN chmod +x /entrypoint.sh
